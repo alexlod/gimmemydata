@@ -17,7 +17,10 @@ def enableDebugMode():
     logging.debug("Debug mode enabled.")
 
 def runObsidianAnalyze():
-    av = AnalyzeVault()
+    
+    vault_dir = Config().get_param('OBSIDIAN_VAULT_DIR')
+
+    av = AnalyzeVault(vault_dir)
     av.analyze_to_db()
 
 

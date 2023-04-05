@@ -2,6 +2,7 @@
 
 import os
 import re
+import csv
 import datetime
 from collections import defaultdict
 import psycopg2
@@ -10,8 +11,8 @@ from gimmemydata.config import Config
 
 class AnalyzeVault():
 
-    def __init__(self):
-        self.vault_path = Config().get_param('OBSIDIAN_VAULT_DIR')
+    def __init__(self, vault_dir):
+        self.vault_dir = vault_dir
         self.render_host = Config().get_param('RENDER_HOST_NAME')
         self.render_db_name = Config().get_param('RENDER_DB_NAME')
         self.render_db_user = Config().get_param('RENDER_DB_USERNAME')
@@ -36,6 +37,23 @@ class AnalyzeVault():
                         return None
         return None
 
+    def truncate_path(self, vault_dir, file_path):
+        # Remove trailing slashes from the base path and file path
+        vault_dir = vault_dir.rstrip('/')
+        vault_name = os.path.basename(vault_dir)
+        file_path = file_path.rstrip('/')
+
+        # Get the relative path of the file with respect to the base path
+        rel_path = os.path.relpath(file_path, vault_dir)
+        rel_dir = os.path.dirname(rel_path)
+
+        # If the relative path is '.' or '..', return the full file path
+        if rel_path == '.' or rel_path == '..':
+            print('ding ding ding')
+            return vault_name, file_path
+
+        return vault_name, rel_dir
+
     # Define a function to calculate the word count of a file
     def get_word_count(self, file_path):
         with open(file_path, 'r') as f:
@@ -43,76 +61,79 @@ class AnalyzeVault():
         words = contents.split()
         return len(words)
 
+    def analyze_vault(self):
+        # Define a dictionary to store the file counts and word counts
+        file_stats = defaultdict(int)
+
+        # Iterate over the files in the Obsidian vault and populate the file_counts and word_counts dictionaries
+        for root, dirs, files in os.walk(self.vault_dir):
+            for file in files:
+                file_path = os.path.join(root, file)
+                if file.endswith('.md'):
+                    # Get the file creation time
+                    ctime = os.stat(file_path).st_birthtime
+                    date = datetime.datetime.fromtimestamp(ctime).date()
+                    # Check if there is YAML frontmatter with a date field
+                    yaml_date = self.get_date_from_yaml(file_path)
+                    if yaml_date is not None:
+                        date = yaml_date.date()
+
+                    vault_name, truncated_path = self.truncate_path(self.vault_dir, file_path)
+                    word_cnt = self.get_word_count(file_path)
+
+                    file_stats[(date, truncated_path, file, vault_name,
+                                    word_cnt)] += 1
+        
+        # Create a list of all dates between the earliest and latest dates in the file_stats dictionary
+        date_list = [entry[0] for entry in file_stats.keys()]
+        min_date = min(file_stats.keys())[0]
+        max_date = datetime.date.today()
+        all_dates = [min_date + datetime.timedelta(days=x) for x in range((max_date - min_date).days + 1)]
+
+        # Create a set of dates that have file entries
+        file_dates = set(date_list)
+
+        # create new dict with a row for each file and a row for each missing date
+        stats_by_date = {}
+        for entry in file_stats.keys():
+            date, path, filename, vault_name, word_count = entry
+            stats_by_date[(date, path, filename, vault_name, word_count)] = file_stats[(date, path, filename, vault_name, word_count)]
+            for d in all_dates:
+                if d not in file_dates:
+                    stats_by_date[(d,'','','',0)] = 0
+
+        return stats_by_date
+
     def analyze_to_file(self):
 
-        # Define a dictionary to store the file counts and word counts
-        file_counts = defaultdict(int)
-        word_counts = defaultdict(int)
+        stats = self.analyze_vault()
 
         of = Config().get_param('LOCAL_DATA_DIR') + '/obsidian/obsidian_analytics.csv'
 
-        with open(of, "w", encoding="utf-8") as t:
+        with open(of, "w", newline='', encoding="utf-8") as t:
 
-            # Iterate over the files in the Obsidian vault and populate the file_counts and word_counts dictionaries
-            for root, dirs, files in os.walk(self.vault_path):
-                for file in files:
-                    file_path = os.path.join(root, file)
-                    print(file_path)
-                    if file.endswith('.md'):
-                        # Get the file creation time
-                        ctime = os.path.getctime(file_path)
-                        date = datetime.datetime.fromtimestamp(ctime).date()
-                        # Check if there is YAML frontmatter with a date field
-                        yaml_date = self.get_date_from_yaml(file_path)
-                        if yaml_date is not None:
-                            date = yaml_date.date()
-
-                        # Update the file and word counts for the date
-                        top_level_dir = None
-                        second_level_dir = None
-                        rel_path = os.path.relpath(
-                            os.path.dirname(file_path), self.vault_path)
-                        dirs = rel_path.split(os.sep)
-
-                        if len(dirs) >= 1:
-                            top_level_dir = dirs[0]
-                            print(top_level_dir)
-                        if len(dirs) >= 2:
-                            second_level_dir = dirs[1]
-
-                        file_counts[(date, top_level_dir,
-                                     second_level_dir)] += 1
-                        word_counts[(date, top_level_dir, second_level_dir)
-                                    ] += self.get_word_count(file_path)
-
-            print('got thru all files')
-            # Iterate over the dates and insert the data into the file
-            start_date = min(file_counts.keys())[0]
-            end_date = datetime.date.today()
-            current_date = start_date
-            while current_date <= end_date:
-                has_files = False
-                for top_level_dir in set([k[1] for k in file_counts.keys()]):
-                    for second_level_dir in set([k[2] for k in file_counts.keys() if k[1] == top_level_dir]):
-                        file_count = file_counts[(
-                            current_date, top_level_dir, second_level_dir)]
-                        edit_count = 0
-                        word_count = word_counts[(
-                            current_date, top_level_dir, second_level_dir)]
-                        if file_count > 0:
-                            # Set the flag to True if there are any files for this date
-                            has_files = True
-                            # Insert the data into the file
-                            t.write(
-                                f'{current_date},{top_level_dir},{second_level_dir},{file_count},{edit_count},{word_count}\n')
-                # If there are no files for this date, write a row with null/zero values
-                if not has_files:
-                    t.write(f'{current_date},,,0,0,0\n')
-                current_date += datetime.timedelta(days=1)
+            # Write the stats to a csv file
+            writer = csv.writer(t)
+            writer.writerow(['date', 'path', 'filename', 'vault_name', 'word_count', 'file_count'])
+            for entry in stats.keys():
+                date, path, filename, vault_name, word_count = entry
+                count = stats[(date, path, filename, vault_name, word_count)]
+                writer.writerow([date, path, filename, vault_name, word_count, count])
 
         print(f'Saved Obsidian analytics to file at: {of}')
 
     def analyze_to_db(self):
+        """
+            CREATE TABLE obsidian_analytics (
+                id SERIAL PRIMARY KEY,
+                date DATE NOT NULL,
+                directory TEXT,
+                file_name TEXT,
+                vault_name TEXT,
+                word_count INT,
+                file_count INT
+            );
+        """
 
         # Set up a connection to the PostgreSQL database
         conn = psycopg2.connect(
@@ -123,76 +144,30 @@ class AnalyzeVault():
             password=self.render_db_password
         )
 
-        # Define a dictionary to store the file counts and word counts
-        file_counts = defaultdict(int)
-        word_counts = defaultdict(int)
+        stats = self.analyze_vault()
 
         # Define a function to insert the data into the database
-        def insert_data(date, top_level_dir, second_level_dir, file_count, edit_count, word_count):
+        def insert_data(date, file_path, file_name, vault_name, word_cnt, file_cnt):
             with conn.cursor() as cur:
                 cur.execute("""
                     INSERT INTO obsidian_analytics
-                    (date, top_level_dir, second_level_dir, file_count, edit_count, word_count)
+                    (date, directory, file_name, vault_name, word_count, file_count)
                     VALUES (%s, %s, %s, %s, %s, %s)
-                """, (date, top_level_dir, second_level_dir, file_count, edit_count, word_count))
+                """, (date, file_path, file_name, vault_name, word_cnt, file_cnt))
             conn.commit()
 
-        # Iterate over the files in the Obsidian vault and populate the file_counts and word_counts dictionaries
-        for root, dirs, files in os.walk(self.vault_path):
-            for file in files:
-                file_path = os.path.join(root, file)
-                if file.endswith('.md'):
-                    # Get the file creation time
-                    ctime = os.path.getctime(file_path)
-                    date = datetime.datetime.fromtimestamp(ctime).date()
-                    # Check if there is YAML frontmatter with a date field
-                    yaml_date = self.get_date_from_yaml(file_path)
-                    if yaml_date is not None:
-                        date = yaml_date.date()
+        # Clear the table before inserting new data
+        with conn.cursor() as cur:
+            cur.execute('TRUNCATE TABLE obsidian_analytics')
+        conn.commit()
 
-                    # Update the file and word counts for the date
-                    top_level_dir = None
-                    second_level_dir = None
-                    rel_path = os.path.relpath(
-                        os.path.dirname(file_path), self.vault_path)
-                    dirs = rel_path.split(os.sep)
-
-                    if len(dirs) >= 1:
-                        top_level_dir = dirs[0]
-                    if len(dirs) >= 2:
-                        second_level_dir = dirs[1]
-
-                    file_counts[(date, top_level_dir,
-                                    second_level_dir)] += 1
-                    word_counts[(date, top_level_dir, second_level_dir)
-                                ] += self.get_word_count(file_path)
-
-        # Iterate over the dates and insert the data into the file
-        start_date = min(file_counts.keys())[0]
-        end_date = datetime.date.today()
-        current_date = start_date
-        while current_date <= end_date:
-            has_files = False
-            for top_level_dir in set([k[1] for k in file_counts.keys()]):
-                for second_level_dir in set([k[2] for k in file_counts.keys() if k[1] == top_level_dir]):
-                    file_count = file_counts[(
-                        current_date, top_level_dir, second_level_dir)]
-                    edit_count = 0
-                    word_count = word_counts[(
-                        current_date, top_level_dir, second_level_dir)]
-                    if file_count > 0:
-                        # Set the flag to True if there are any files for this date
-                        has_files = True
-                        
-                        # Insert the data into the database
-                        insert_data(current_date, top_level_dir, second_level_dir, file_count, edit_count, word_count)
-            
-            # If there are no files for this date, write a row with null/zero values
-            if not has_files:
-                # Insert the data into the database
-                insert_data(current_date, "", "", 0, 0, 0)        
-
-            current_date += datetime.timedelta(days=1)
+        for entry in stats.keys():
+            date, file_path, file_name, vault_name, word_cnt = entry
+            file_cnt = stats[(date, file_path, file_name, vault_name, word_cnt)]
+            insert_data(date, file_path, file_name, vault_name, word_cnt, file_cnt)
 
         # Close the database connection
         conn.close()
+        
+        print(f'Finished saving Obsidian analytics to db: {self.render_db_name}')
+

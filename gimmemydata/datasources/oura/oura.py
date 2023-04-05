@@ -1,11 +1,13 @@
 import requests
-from dotenv import load_dotenv
 import os
+import psycopg2
+from gimmemydata.config import Config
+from gimmemydata.datasources.oura.client import OuraClientV2
+import datetime
 
 
-load_dotenv()
 
-OURA_TOKEN = os.getenv('OURA_ACCESS_TOKEN')
+
 
 endpoints = ['daily_activity','daily_sleep','sleep','workout','daily_readiness']
 
@@ -15,19 +17,12 @@ url = 'https://api.ouraring.com/v2/usercollection/sleep'
 url = 'https://api.ouraring.com/v2/usercollection/workout' 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 
+OURA_PERSONAL_ACCESS_TOKEN = Config().get_param('OURA_PERSONAL_ACCESS_TOKEN')
+client = OuraClientV2(personal_access_token=OURA_PERSONAL_ACCESS_TOKEN)
 
+heartrate = client.heartrate(start_datetime='2021-11-01T00:00:00-08:00', end_datetime='2021-12-01T00:00:00-08:00')
 
-
-params={ 
-    'start_date': '2021-11-01', 
-    'end_date': '2021-12-01' 
-}
-headers = { 
-  'Authorization': f'Bearer {OURA_TOKEN}' 
-}
-response = requests.request('GET', url, headers=headers, params=params) 
-print(response.text)
-
+print(heartrate)
 
 # # HEART RATE:
 # url = 'https://api.ouraring.com/v2/usercollection/heartrate' 

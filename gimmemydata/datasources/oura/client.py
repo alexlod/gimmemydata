@@ -94,6 +94,14 @@ class OuraClientV2:
 
     def daily_readiness(self, start_date=None, end_date=None, next_token=None):
         return self._get_summary(start_date, end_date, next_token, "daily_readiness")
+    
+    def daily_sleep(self, start_date=None, end_date=None, next_token=None):
+        # Convert the start and end dates to datetime objects
+        start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+        start_str = start_date.strftime('%Y-%m-%d')
+        end_str = end_date.strftime('%Y-%m-%d')
+        return self._get_summary(start_str, end_str, next_token, "daily_sleep")
 
     def personal_info(self):
         url = f"{self.API_ENDPOINT}/personal_info"
@@ -114,6 +122,7 @@ class OuraClientV2:
 
     def _make_request(self, url):
         response = self._auth_handler.make_request_v2(url)
+        print(response)
         exceptions.detect_and_raise_error(response)
         payload = json.loads(response.content.decode("utf8"))
         return payload

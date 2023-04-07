@@ -2,6 +2,7 @@
 data/
 
 config.yaml
+.cache-samjulius
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

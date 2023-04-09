@@ -1,0 +1,5 @@
+
+stravalib==1.2.0
+pyyaml
+boto3
+psycopg2

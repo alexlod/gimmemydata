@@ -1,6 +1,6 @@
 
 import boto3
-from gimmemydata.config import Config
+from manage.config import Config
 
 class S3Client():
 

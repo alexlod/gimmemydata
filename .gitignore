@@ -3,6 +3,9 @@ data/
 
 config.yaml
 .cache-samjulius
+.cache
+
+test.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

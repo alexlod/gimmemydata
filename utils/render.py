@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
-import os
-import re
-import csv
-import datetime
 import psycopg2
-from gimmemydata.config import Config
+from manage.config import Config
 
 
 class DBClient():
@@ -16,7 +12,6 @@ class DBClient():
         self.render_db_user = Config().get_param('RENDER_DB_USERNAME')
         self.render_db_password = Config().get_param('RENDER_DB_PASSWORD')
         self.connection = self.connect()
-
 
     def connect(self):
         # Set up a connection to the PostgreSQL database
@@ -35,3 +30,13 @@ class DBClient():
         with self.connection.cursor() as cur:
             cur.execute(sql, data)
         self.connection.commit()
+
+    def insert_task_log(self, task_name, timestamp, status):
+        try:
+            query = "INSERT INTO gimmemydata_task_logs (task_name, timestamp, status) VALUES (%s, %s, %s)"
+            with self.connection.cursor() as cur:
+                cur.execute(query, (task_name, timestamp, status))
+            self.connection.commit()
+            print("Task log inserted successfully.")
+        except Exception as e:
+            print(f"Error while inserting task log: {e}")

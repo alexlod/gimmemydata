@@ -6,7 +6,7 @@ import csv
 import datetime
 from collections import defaultdict
 import psycopg2
-from gimmemydata.config import Config
+from manage.config import Config
 
 
 class AnalyzeVault():
@@ -171,3 +171,36 @@ class AnalyzeVault():
         
         print(f'Finished saving Obsidian analytics to db: {self.render_db_name}')
 
+
+
+
+# def runObsidianAnalyze():
+    
+#     vault_dir = Config().get_param('OBSIDIAN_VAULT_DIR')
+
+#     av = AnalyzeVault(vault_dir)
+#     av.analyze_to_db()
+
+
+# def cli():
+
+#     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+#     exclusive_group = parser.add_mutually_exclusive_group(required=False)
+#     exclusive_group.add_argument('--configure', action='store_true', help="Configure the CLI and create or update config yaml file.")
+#     parser.add_argument('--obsidian', action="store_true", help="Analyze Obsidian vault & return data.")
+#     parser.add_argument('--debug', action="store_true", help="Enable debug mode.")
+#     args = parser.parse_args().__dict__
+
+#     if args.get('debug'):
+#         enableDebugMode()
+
+#     if args.get('configure'):
+#         Config().configure()
+#         sys.exit(1)
+#     else:
+#         Config().get_config()
+
+#     if args.get('obsidian'):
+#         runObsidianAnalyze()
+#     else:
+#         parser.print_help()

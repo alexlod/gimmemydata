@@ -5,9 +5,8 @@ import os
 
 import requests
 import os
-import psycopg2
-from gimmemydata.config import Config
-from gimmemydata.datasources.oura.client import OuraClientV2
+from manage.config import Config
+from datasources.oura.client import OuraClientV2
 import datetime
 
 

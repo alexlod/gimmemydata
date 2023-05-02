@@ -1,3 +1,6 @@
+import sys
+print(sys.executable)
+
 import requests
 from requests_oauthlib import OAuth2Session
 

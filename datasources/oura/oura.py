@@ -76,7 +76,7 @@ def get_heartrate():
     
         while date <= end_date:
             date_plus_one = date + datetime.timedelta(days=1)
-            print(f'New api call where start_date={date.strftime("%Y-%m-%d")} and end_date={date_plus_one.strftime("%Y-%m-%d")} and api: {api_call.__name__}')
+            print(f'New api call where start_date={date.strftime("%Y-%m-%d")} and end_date={date_plus_one.strftime("%Y-%m-%d")} and api: heartrate')
             data = oura_client.heartrate(start_date=date.strftime('%Y-%m-%d'), end_date=date_plus_one.strftime('%Y-%m-%d'))
             
             if data['data'] == []:

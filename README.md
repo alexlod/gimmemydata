@@ -2,7 +2,7 @@
 
 A utility for gathering my personal data from public APIs and saving it in S3 & Postgres.   
 
-![image](https://user-images.githubusercontent.com/2133615/235820536-2ce17b67-608c-46b3-9806-f41dd56e8721.png)
+![image](https://user-images.githubusercontent.com/2133615/235820536-2ce17b67-608c-46b3-9806-f41dd56e8721.png | width=700)
 
 
 ## Source API Docs

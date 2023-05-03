@@ -1,7 +1,7 @@
 import json
 import datetime
-from . import exceptions
-from .auth import OAuthRequestHandler, PersonalRequestHandler
+from datasources.oura import exceptions
+from datasources.oura.auth import OAuthRequestHandler, PersonalRequestHandler
 
 class OuraClientV2:
 

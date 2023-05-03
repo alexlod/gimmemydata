@@ -5,4 +5,9 @@ boto3
 psycopg2
 spotipy
 requests_oauthlib
+schedule
+argparse
 python-crontab
+pandas
+requests
+

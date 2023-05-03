@@ -4,7 +4,6 @@ print(sys.executable)
 import requests
 from requests_oauthlib import OAuth2Session
 
-
 class OuraOAuth2Client:
     """
     Use this for authorizing user and obtaining initial access and refresh token.

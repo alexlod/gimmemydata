@@ -70,7 +70,7 @@ def get_spotify_history():
 
 
 def run_task():
-    script_name = 'spotify_history_fetcher'
+    script_name = 'spotify-get_recently_played'
     task_ts = datetime.datetime.now()
     formatted_ts = datetime.strptime(task_ts, "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")
 

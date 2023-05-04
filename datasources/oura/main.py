@@ -5,6 +5,7 @@ from manage.config import Config
 from datasources.oura.client import OuraClientV2
 from utils.render import DBClient
 from utils.aws import S3Client
+import gzip
 
 
 OURA_PERSONAL_ACCESS_TOKEN = Config().get_param('OURA_PERSONAL_ACCESS_TOKEN')
@@ -108,8 +109,11 @@ def fetch_and_store_data(start_date, end_date, api_endpoint):
             day_datetime = datetime.datetime.strptime(record_day, '%Y-%m-%d')
             dir_path = day_datetime.strftime(f'oura/{api_endpoint}/%Y/%m/%d')
             s3_key = f'{dir_path}/{filename}'
-            # print(json.dumps(record))
-            s3.write_to_s3(json.dumps(record), s3_key)
+            
+            payload_json = json.dumps(record).encode('utf-8')
+            payload_gz = gzip.compress(payload_json)
+
+            s3.write_to_s3(payload_gz, s3_key)
             print(f'Wrote {s3_key} to S3 for date: {record["day"]}')
             
 def get_report(endpoint):

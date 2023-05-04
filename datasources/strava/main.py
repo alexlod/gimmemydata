@@ -6,8 +6,8 @@ from utils.render import DBClient
 from utils.aws import S3Client
 from datasources.strava.auth import StravaAuth
 from botocore.exceptions import ClientError
+import gzip
 
-POLL_INTERVAL = 3600
 S3_BUCKET_NAME = Config().get_param('S3_BUCKET_NAME')
 
 # Set up DB Connection for Auth
@@ -16,7 +16,6 @@ cur = conn.cursor()
 
 # Set up S3 client and bucket
 s3 = S3Client()
-
 
 def get_last_activity_id():
     print('Getting last activity ID saved to S3...')
@@ -63,6 +62,25 @@ def get_last_activity_datetime():
     
     return latest_activity_datetime
 
+def write_event_to_s3(events, prefix):
+
+    # Write data to S3
+    if len(events) > 0:
+        # Save each new activity to S3
+        for event in events:
+
+            event_ts = event.start_date_local
+            filename = event.id + '.json.gz'
+            dir_path = event_ts.strftime(f'{prefix}/%Y/%m/%d/%H/')
+            s3_key = dir_path + filename
+            
+            event_json = json.dumps(event.to_dict()).encode('utf-8')
+            
+            # Compress the file content using gzip
+            file_content = gzip.compress(event_json)
+            
+            s3.write_to_s3(file_content, s3_key)
+            print('Wrote data to S3:', s3_key)
 
 def run_task():
     script_name = 'strava-get_activities'
@@ -88,23 +106,11 @@ def run_task():
 
         for activity in activities:
             new_activities.append(activity)
-        
-        print(f'new activities: {new_activities}')
+
         print(f'Found {len(new_activities)} new activities')
 
-        # Save each new activity to S3
-        for activity in new_activities:
-
-            print(activity.to_dict())
-            # activity_ts = datetime.datetime.strptime(activity.start_date_local, '%Y-%m-%dT%H:%M:%SZ')
-            activity_ts = activity.start_date_local
-            activity_id = activity.id
-            s3_key = f'strava/activities/{activity_ts.strftime("%Y/%m/%d")}/{activity_id}.json'
-
-            # Write to S3
-            body = json.dumps(activity.to_dict())
-            s3.write_to_s3(body, s3_key)
-            print(f'Uploaded activity {activity.id} to S3 at: {s3_key}')
+        # Write new activities to S3
+        write_event_to_s3(new_activities, 'strava/activities')
 
         # If the script ran successfully, insert a log entry with a successful status
         db_client.insert_task_log(script_name, formatted_ts, 'success')

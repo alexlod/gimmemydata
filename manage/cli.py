@@ -3,12 +3,11 @@ from manage.config import Config
 import logging
 import sys
 import argparse
-import os
-from crontab import CronTab
 from datasources.spotify import main as spotify_main
 from datasources.strava import main as strava_main
 from datasources.oura import main as oura_main
 from datasources.github import main as github_main
+from manage.cron import Cron
 
 SUPPORTED_DATASOURCES = ['spotify', 'strava', 'oura', 'github']
 
@@ -19,29 +18,6 @@ def enableDebugMode():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
     logging.debug("Debug mode enabled.")
-
-def list_scheduled_jobs():
-    cron = CronTab(user=os.getlogin())
-    print("Current scheduled jobs:")
-    gimmemydata_jobs = [job for job in cron if job.comment == "Created by GimmeMyData"] 
-    for job in gimmemydata_jobs:
-        print(job)
-
-def clear_scheduled_jobs():
-    cron = CronTab(user=os.getlogin())
-    jobs_to_remove = [job for job in cron if job.comment == "Created by GimmeMyData"] 
-    for job in jobs_to_remove:
-        cron.remove(job)
-    cron.write()
-    print("Cleared all GimmeMyData cron jobs for current user.")
-
-def schedule_job(service, interval):
-    cron = CronTab(user=os.getlogin())
-    job_command = f"python3 {os.path.abspath(sys.modules[service + '_main'].__file__)}"
-    job = cron.new(command=job_command)
-    job.set_comment("Created by GimmeMyData")  # Add this line so we can identify jobs created by this app
-    job.setall(f"*/{interval} * * * *")  # Run every 'interval' minutes
-    cron.write()
 
 def run_script(service):
     print(f"Running {service} script...")
@@ -90,6 +66,7 @@ def cli():
     schedule_parser.add_argument('interval', type=int, help='Interval (in minutes) at which the script should run.')
 
     args = parser.parse_args()
+    cron = Cron()
 
     if args.__dict__.get('debug'):
         enableDebugMode()
@@ -99,15 +76,15 @@ def cli():
         sys.exit(1)
 
     if args.command == 'list':
-        list_scheduled_jobs()
+        cron.list_scheduled_jobs()
     elif args.command == 'clear':
-        clear_scheduled_jobs()
+        cron.clear_scheduled_jobs()
     elif args.command == 'deploy':
         deploy_main()
     elif args.command == 'run':
         run_script(args.service)
     elif args.command == 'schedule':
-        schedule_job(args.service, args.interval)
+        cron.schedule_job(args.service, args.interval)
     else:
         parser.print_help()
 

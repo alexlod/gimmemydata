@@ -8,6 +8,7 @@ from crontab import CronTab
 from datasources.spotify import spotify as spotify_main
 from datasources.strava import strava as strava_main
 from datasources.oura import oura as oura_main
+from datasources.github import github as github_main
 
 SUPPORTED_DATASOURCES = ['spotify', 'strava', 'oura', 'github']
 
@@ -41,6 +42,9 @@ def run_script(service):
         elif service == 'oura':
             oura_main.run_task()
             print("Script finished successfully.")
+        elif service == 'github':
+            github_main.run_task()
+            print("Github script finished successfully.")
         else:
             print(f"Service '{service}' not recognized.")
             return

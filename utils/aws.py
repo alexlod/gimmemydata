@@ -34,13 +34,26 @@ class S3Client():
         
         return latest_activity_id
     
-    def get_latest_mtime_date_from_s3(self, prefix):
-        latest_date = None
+    def get_latest_filename(self, prefix):
+        """
+        Get the most recent filename from S3 based on the time-aligned directory structure.
+        Returns filename as string (excluding extension) or None if no files are found.
+        """
+        try:
+            s3_objects = []
+            paginator = self.s3_client.get_paginator('list_objects_v2')
+            for page in paginator.paginate(Bucket=self.bucket_name, Prefix=prefix):
+                if 'Contents' in page:
+                    s3_objects += page['Contents']
 
-        for obj in self.s3_client.get_objects(self.bucket_name, prefix):
-            date_str = obj.key.split('/')[-1].split('.')[0]
-            date_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d")
-            if latest_date is None or date_obj > latest_date:
-                latest_date = date_obj
+            if not s3_objects:
+                latest_filename = None
+            else:
+                latest_object = s3_objects[-1]
+                latest_filename = latest_object['Key'].split('/')[-1].split('.')[0]
 
-        return latest_date
+        except KeyError:
+            latest_filename = None
+            print('No previous activities found in S3')
+
+        return latest_filename

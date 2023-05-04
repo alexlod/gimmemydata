@@ -1,0 +1,142 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "contributors",
+        "day",
+        "score",
+        "timestamp"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "default": "",
+            "title": "The id Schema",
+            "examples": [
+                "string"
+            ]
+        },
+        "contributors": {
+            "type": "object",
+            "default": {},
+            "title": "The contributors Schema",
+            "required": [
+                "deep_sleep",
+                "efficiency",
+                "latency",
+                "rem_sleep",
+                "restfulness",
+                "timing",
+                "total_sleep"
+            ],
+            "properties": {
+                "deep_sleep": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The deep_sleep Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "efficiency": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The efficiency Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "latency": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The latency Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "rem_sleep": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The rem_sleep Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "restfulness": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The restfulness Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "timing": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The timing Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "total_sleep": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The total_sleep Schema",
+                    "examples": [
+                        0
+                    ]
+                }
+            },
+            "examples": [{
+                "deep_sleep": 0,
+                "efficiency": 0,
+                "latency": 0,
+                "rem_sleep": 0,
+                "restfulness": 0,
+                "timing": 0,
+                "total_sleep": 0
+            }]
+        },
+        "day": {
+            "type": "string",
+            "default": "",
+            "title": "The day Schema",
+            "examples": [
+                "2019-08-24"
+            ]
+        },
+        "score": {
+            "type": "integer",
+            "default": 0,
+            "title": "The score Schema",
+            "examples": [
+                0
+            ]
+        },
+        "timestamp": {
+            "type": "string",
+            "default": "",
+            "title": "The timestamp Schema",
+            "examples": [
+                "2019-08-24T14:15:22Z"
+            ]
+        }
+    },
+    "examples": [{
+        "id": "string",
+        "contributors": {
+            "deep_sleep": 0,
+            "efficiency": 0,
+            "latency": 0,
+            "rem_sleep": 0,
+            "restfulness": 0,
+            "timing": 0,
+            "total_sleep": 0
+        },
+        "day": "2019-08-24",
+        "score": 0,
+        "timestamp": "2019-08-24T14:15:22Z"
+    }]
+}

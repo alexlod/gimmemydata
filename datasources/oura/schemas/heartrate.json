@@ -1,0 +1,41 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "bpm",
+        "source",
+        "timestamp"
+    ],
+    "properties": {
+        "bpm": {
+            "type": "integer",
+            "default": 0,
+            "title": "The bpm Schema",
+            "examples": [
+                0
+            ]
+        },
+        "source": {
+            "type": "string",
+            "default": "",
+            "title": "The source Schema",
+            "examples": [
+                "awake"
+            ]
+        },
+        "timestamp": {
+            "type": "string",
+            "default": "",
+            "title": "The timestamp Schema",
+            "examples": [
+                "2019-08-24T14:15:22Z"
+            ]
+        }
+    },
+    "examples": [{
+        "bpm": 0,
+        "source": "awake",
+        "timestamp": "2019-08-24T14:15:22Z"
+    }]
+}

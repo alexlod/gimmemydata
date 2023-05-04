@@ -1,0 +1,530 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "average_breath",
+        "average_heart_rate",
+        "average_hrv",
+        "awake_time",
+        "bedtime_end",
+        "bedtime_start",
+        "day",
+        "deep_sleep_duration",
+        "efficiency",
+        "heart_rate",
+        "hrv",
+        "latency",
+        "light_sleep_duration",
+        "low_battery_alert",
+        "lowest_heart_rate",
+        "movement_30_sec",
+        "period",
+        "readiness",
+        "readiness_score_delta",
+        "rem_sleep_duration",
+        "restless_periods",
+        "sleep_phase_5_min",
+        "sleep_score_delta",
+        "time_in_bed",
+        "total_sleep_duration",
+        "type"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "default": "",
+            "title": "The id Schema",
+            "examples": [
+                "string"
+            ]
+        },
+        "average_breath": {
+            "type": "integer",
+            "default": 0,
+            "title": "The average_breath Schema",
+            "examples": [
+                0
+            ]
+        },
+        "average_heart_rate": {
+            "type": "integer",
+            "default": 0,
+            "title": "The average_heart_rate Schema",
+            "examples": [
+                0
+            ]
+        },
+        "average_hrv": {
+            "type": "integer",
+            "default": 0,
+            "title": "The average_hrv Schema",
+            "examples": [
+                0
+            ]
+        },
+        "awake_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The awake_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "bedtime_end": {
+            "type": "string",
+            "default": "",
+            "title": "The bedtime_end Schema",
+            "examples": [
+                "2019-08-24T14:15:22Z"
+            ]
+        },
+        "bedtime_start": {
+            "type": "string",
+            "default": "",
+            "title": "The bedtime_start Schema",
+            "examples": [
+                "2019-08-24T14:15:22Z"
+            ]
+        },
+        "day": {
+            "type": "string",
+            "default": "",
+            "title": "The day Schema",
+            "examples": [
+                "2019-08-24"
+            ]
+        },
+        "deep_sleep_duration": {
+            "type": "integer",
+            "default": 0,
+            "title": "The deep_sleep_duration Schema",
+            "examples": [
+                0
+            ]
+        },
+        "efficiency": {
+            "type": "integer",
+            "default": 0,
+            "title": "The efficiency Schema",
+            "examples": [
+                0
+            ]
+        },
+        "heart_rate": {
+            "type": "object",
+            "default": {},
+            "title": "The heart_rate Schema",
+            "required": [
+                "interval",
+                "items",
+                "timestamp"
+            ],
+            "properties": {
+                "interval": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The interval Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "default": [],
+                    "title": "The items Schema",
+                    "items": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "A Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "examples": [
+                        [
+                            0]
+                    ]
+                },
+                "timestamp": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The timestamp Schema",
+                    "examples": [
+                        "2019-08-24T14:15:22Z"
+                    ]
+                }
+            },
+            "examples": [{
+                "interval": 0,
+                "items": [
+                    0
+                ],
+                "timestamp": "2019-08-24T14:15:22Z"
+            }]
+        },
+        "hrv": {
+            "type": "object",
+            "default": {},
+            "title": "The hrv Schema",
+            "required": [
+                "interval",
+                "items",
+                "timestamp"
+            ],
+            "properties": {
+                "interval": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The interval Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "default": [],
+                    "title": "The items Schema",
+                    "items": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "A Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "examples": [
+                        [
+                            0]
+                    ]
+                },
+                "timestamp": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The timestamp Schema",
+                    "examples": [
+                        "2019-08-24T14:15:22Z"
+                    ]
+                }
+            },
+            "examples": [{
+                "interval": 0,
+                "items": [
+                    0
+                ],
+                "timestamp": "2019-08-24T14:15:22Z"
+            }]
+        },
+        "latency": {
+            "type": "integer",
+            "default": 0,
+            "title": "The latency Schema",
+            "examples": [
+                0
+            ]
+        },
+        "light_sleep_duration": {
+            "type": "integer",
+            "default": 0,
+            "title": "The light_sleep_duration Schema",
+            "examples": [
+                0
+            ]
+        },
+        "low_battery_alert": {
+            "type": "boolean",
+            "default": false,
+            "title": "The low_battery_alert Schema",
+            "examples": [
+                true
+            ]
+        },
+        "lowest_heart_rate": {
+            "type": "integer",
+            "default": 0,
+            "title": "The lowest_heart_rate Schema",
+            "examples": [
+                0
+            ]
+        },
+        "movement_30_sec": {
+            "type": "string",
+            "default": "",
+            "title": "The movement_30_sec Schema",
+            "examples": [
+                "1143222134"
+            ]
+        },
+        "period": {
+            "type": "integer",
+            "default": 0,
+            "title": "The period Schema",
+            "examples": [
+                0
+            ]
+        },
+        "readiness": {
+            "type": "object",
+            "default": {},
+            "title": "The readiness Schema",
+            "required": [
+                "contributors",
+                "score",
+                "temperature_deviation",
+                "temperature_trend_deviation"
+            ],
+            "properties": {
+                "contributors": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The contributors Schema",
+                    "required": [
+                        "activity_balance",
+                        "body_temperature",
+                        "hrv_balance",
+                        "previous_day_activity",
+                        "previous_night",
+                        "recovery_index",
+                        "resting_heart_rate",
+                        "sleep_balance"
+                    ],
+                    "properties": {
+                        "activity_balance": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The activity_balance Schema",
+                            "examples": [
+                                "Contribution of cumulative activity balance in range [1, 100]."
+                            ]
+                        },
+                        "body_temperature": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The body_temperature Schema",
+                            "examples": [
+                                "Contribution of body temperature in range [1, 100]."
+                            ]
+                        },
+                        "hrv_balance": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The hrv_balance Schema",
+                            "examples": [
+                                "Contribution of heart rate variability balance in range [1, 100]."
+                            ]
+                        },
+                        "previous_day_activity": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The previous_day_activity Schema",
+                            "examples": [
+                                "Contribution of previous day's activity in range [1, 100]."
+                            ]
+                        },
+                        "previous_night": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The previous_night Schema",
+                            "examples": [
+                                "Contribution of previous night's sleep in range [1, 100]."
+                            ]
+                        },
+                        "recovery_index": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The recovery_index Schema",
+                            "examples": [
+                                "Contribution of recovery index in range [1, 100]."
+                            ]
+                        },
+                        "resting_heart_rate": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The resting_heart_rate Schema",
+                            "examples": [
+                                "Contribution of resting heart rate in range [1, 100]."
+                            ]
+                        },
+                        "sleep_balance": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The sleep_balance Schema",
+                            "examples": [
+                                "Contribution of sleep balance in range [1, 100]."
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "activity_balance": "Contribution of cumulative activity balance in range [1, 100].",
+                        "body_temperature": "Contribution of body temperature in range [1, 100].",
+                        "hrv_balance": "Contribution of heart rate variability balance in range [1, 100].",
+                        "previous_day_activity": "Contribution of previous day's activity in range [1, 100].",
+                        "previous_night": "Contribution of previous night's sleep in range [1, 100].",
+                        "recovery_index": "Contribution of recovery index in range [1, 100].",
+                        "resting_heart_rate": "Contribution of resting heart rate in range [1, 100].",
+                        "sleep_balance": "Contribution of sleep balance in range [1, 100]."
+                    }]
+                },
+                "score": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The score Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "temperature_deviation": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The temperature_deviation Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "temperature_trend_deviation": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The temperature_trend_deviation Schema",
+                    "examples": [
+                        0
+                    ]
+                }
+            },
+            "examples": [{
+                "contributors": {
+                    "activity_balance": "Contribution of cumulative activity balance in range [1, 100].",
+                    "body_temperature": "Contribution of body temperature in range [1, 100].",
+                    "hrv_balance": "Contribution of heart rate variability balance in range [1, 100].",
+                    "previous_day_activity": "Contribution of previous day's activity in range [1, 100].",
+                    "previous_night": "Contribution of previous night's sleep in range [1, 100].",
+                    "recovery_index": "Contribution of recovery index in range [1, 100].",
+                    "resting_heart_rate": "Contribution of resting heart rate in range [1, 100].",
+                    "sleep_balance": "Contribution of sleep balance in range [1, 100]."
+                },
+                "score": 0,
+                "temperature_deviation": 0,
+                "temperature_trend_deviation": 0
+            }]
+        },
+        "readiness_score_delta": {
+            "type": "integer",
+            "default": 0,
+            "title": "The readiness_score_delta Schema",
+            "examples": [
+                0
+            ]
+        },
+        "rem_sleep_duration": {
+            "type": "integer",
+            "default": 0,
+            "title": "The rem_sleep_duration Schema",
+            "examples": [
+                0
+            ]
+        },
+        "restless_periods": {
+            "type": "integer",
+            "default": 0,
+            "title": "The restless_periods Schema",
+            "examples": [
+                0
+            ]
+        },
+        "sleep_phase_5_min": {
+            "type": "string",
+            "default": "",
+            "title": "The sleep_phase_5_min Schema",
+            "examples": [
+                "444423323441114"
+            ]
+        },
+        "sleep_score_delta": {
+            "type": "integer",
+            "default": 0,
+            "title": "The sleep_score_delta Schema",
+            "examples": [
+                0
+            ]
+        },
+        "time_in_bed": {
+            "type": "integer",
+            "default": 0,
+            "title": "The time_in_bed Schema",
+            "examples": [
+                0
+            ]
+        },
+        "total_sleep_duration": {
+            "type": "integer",
+            "default": 0,
+            "title": "The total_sleep_duration Schema",
+            "examples": [
+                0
+            ]
+        },
+        "type": {
+            "type": "string",
+            "default": "",
+            "title": "The type Schema",
+            "examples": [
+                "deleted"
+            ]
+        }
+    },
+    "examples": [{
+        "id": "string",
+        "average_breath": 0,
+        "average_heart_rate": 0,
+        "average_hrv": 0,
+        "awake_time": 0,
+        "bedtime_end": "2019-08-24T14:15:22Z",
+        "bedtime_start": "2019-08-24T14:15:22Z",
+        "day": "2019-08-24",
+        "deep_sleep_duration": 0,
+        "efficiency": 0,
+        "heart_rate": {
+            "interval": 0,
+            "items": [
+                0
+            ],
+            "timestamp": "2019-08-24T14:15:22Z"
+        },
+        "hrv": {
+            "interval": 0,
+            "items": [
+                0
+            ],
+            "timestamp": "2019-08-24T14:15:22Z"
+        },
+        "latency": 0,
+        "light_sleep_duration": 0,
+        "low_battery_alert": true,
+        "lowest_heart_rate": 0,
+        "movement_30_sec": "1143222134",
+        "period": 0,
+        "readiness": {
+            "contributors": {
+                "activity_balance": "Contribution of cumulative activity balance in range [1, 100].",
+                "body_temperature": "Contribution of body temperature in range [1, 100].",
+                "hrv_balance": "Contribution of heart rate variability balance in range [1, 100].",
+                "previous_day_activity": "Contribution of previous day's activity in range [1, 100].",
+                "previous_night": "Contribution of previous night's sleep in range [1, 100].",
+                "recovery_index": "Contribution of recovery index in range [1, 100].",
+                "resting_heart_rate": "Contribution of resting heart rate in range [1, 100].",
+                "sleep_balance": "Contribution of sleep balance in range [1, 100]."
+            },
+            "score": 0,
+            "temperature_deviation": 0,
+            "temperature_trend_deviation": 0
+        },
+        "readiness_score_delta": 0,
+        "rem_sleep_duration": 0,
+        "restless_periods": 0,
+        "sleep_phase_5_min": "444423323441114",
+        "sleep_score_delta": 0,
+        "time_in_bed": 0,
+        "total_sleep_duration": 0,
+        "type": "deleted"
+    }]
+}

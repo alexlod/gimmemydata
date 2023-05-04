@@ -1,0 +1,577 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "resource_state",
+        "athlete",
+        "name",
+        "distance",
+        "moving_time",
+        "elapsed_time",
+        "total_elevation_gain",
+        "type",
+        "sport_type",
+        "workout_type",
+        "id",
+        "external_id",
+        "upload_id",
+        "start_date",
+        "start_date_local",
+        "timezone",
+        "utc_offset",
+        "start_latlng",
+        "end_latlng",
+        "location_city",
+        "location_state",
+        "location_country",
+        "achievement_count",
+        "kudos_count",
+        "comment_count",
+        "athlete_count",
+        "photo_count",
+        "map",
+        "trainer",
+        "commute",
+        "manual",
+        "private",
+        "flagged",
+        "gear_id",
+        "from_accepted_tag",
+        "average_speed",
+        "max_speed",
+        "average_cadence",
+        "average_watts",
+        "weighted_average_watts",
+        "kilojoules",
+        "device_watts",
+        "has_heartrate",
+        "average_heartrate",
+        "max_heartrate",
+        "max_watts",
+        "pr_count",
+        "total_photo_count",
+        "has_kudoed",
+        "suffer_score"
+    ],
+    "properties": {
+        "resource_state": {
+            "type": "integer",
+            "default": 0,
+            "title": "The resource_state Schema",
+            "examples": [
+                2
+            ]
+        },
+        "athlete": {
+            "type": "object",
+            "default": {},
+            "title": "The athlete Schema",
+            "required": [
+                "id",
+                "resource_state"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The id Schema",
+                    "examples": [
+                        134815
+                    ]
+                },
+                "resource_state": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The resource_state Schema",
+                    "examples": [
+                        1
+                    ]
+                }
+            },
+            "examples": [{
+                "id": 134815,
+                "resource_state": 1
+            }]
+        },
+        "name": {
+            "type": "string",
+            "default": "",
+            "title": "The name Schema",
+            "examples": [
+                "Happy Friday"
+            ]
+        },
+        "distance": {
+            "type": "number",
+            "default": 0.0,
+            "title": "The distance Schema",
+            "examples": [
+                24931.4
+            ]
+        },
+        "moving_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The moving_time Schema",
+            "examples": [
+                4500
+            ]
+        },
+        "elapsed_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The elapsed_time Schema",
+            "examples": [
+                4500
+            ]
+        },
+        "total_elevation_gain": {
+            "type": "integer",
+            "default": 0,
+            "title": "The total_elevation_gain Schema",
+            "examples": [
+                0
+            ]
+        },
+        "type": {
+            "type": "string",
+            "default": "",
+            "title": "The type Schema",
+            "examples": [
+                "Ride"
+            ]
+        },
+        "sport_type": {
+            "type": "string",
+            "default": "",
+            "title": "The sport_type Schema",
+            "examples": [
+                "MountainBikeRide"
+            ]
+        },
+        "workout_type": {
+            "type": "null",
+            "default": null,
+            "title": "The workout_type Schema",
+            "examples": [
+                null
+            ]
+        },
+        "id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The id Schema",
+            "examples": [
+                154504250376823
+            ]
+        },
+        "external_id": {
+            "type": "string",
+            "default": "",
+            "title": "The external_id Schema",
+            "examples": [
+                "garmin_push_12345678987654321"
+            ]
+        },
+        "upload_id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The upload_id Schema",
+            "examples": [
+                987654321234567891234
+            ]
+        },
+        "start_date": {
+            "type": "string",
+            "default": "",
+            "title": "The start_date Schema",
+            "examples": [
+                "2018-05-02T12:15:09Z"
+            ]
+        },
+        "start_date_local": {
+            "type": "string",
+            "default": "",
+            "title": "The start_date_local Schema",
+            "examples": [
+                "2018-05-02T05:15:09Z"
+            ]
+        },
+        "timezone": {
+            "type": "string",
+            "default": "",
+            "title": "The timezone Schema",
+            "examples": [
+                "(GMT-08:00) America/Los_Angeles"
+            ]
+        },
+        "utc_offset": {
+            "type": "integer",
+            "default": 0,
+            "title": "The utc_offset Schema",
+            "examples": [
+                -
+                25200
+            ]
+        },
+        "start_latlng": {
+            "type": "null",
+            "default": null,
+            "title": "The start_latlng Schema",
+            "examples": [
+                null
+            ]
+        },
+        "end_latlng": {
+            "type": "null",
+            "default": null,
+            "title": "The end_latlng Schema",
+            "examples": [
+                null
+            ]
+        },
+        "location_city": {
+            "type": "null",
+            "default": null,
+            "title": "The location_city Schema",
+            "examples": [
+                null
+            ]
+        },
+        "location_state": {
+            "type": "null",
+            "default": null,
+            "title": "The location_state Schema",
+            "examples": [
+                null
+            ]
+        },
+        "location_country": {
+            "type": "string",
+            "default": "",
+            "title": "The location_country Schema",
+            "examples": [
+                "United States"
+            ]
+        },
+        "achievement_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The achievement_count Schema",
+            "examples": [
+                0
+            ]
+        },
+        "kudos_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The kudos_count Schema",
+            "examples": [
+                3
+            ]
+        },
+        "comment_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The comment_count Schema",
+            "examples": [
+                1
+            ]
+        },
+        "athlete_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The athlete_count Schema",
+            "examples": [
+                1
+            ]
+        },
+        "photo_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The photo_count Schema",
+            "examples": [
+                0
+            ]
+        },
+        "map": {
+            "type": "object",
+            "default": {},
+            "title": "The map Schema",
+            "required": [
+                "id",
+                "summary_polyline",
+                "resource_state"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The id Schema",
+                    "examples": [
+                        "a12345678987654321"
+                    ]
+                },
+                "summary_polyline": {
+                    "type": "null",
+                    "default": null,
+                    "title": "The summary_polyline Schema",
+                    "examples": [
+                        null
+                    ]
+                },
+                "resource_state": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The resource_state Schema",
+                    "examples": [
+                        2
+                    ]
+                }
+            },
+            "examples": [{
+                "id": "a12345678987654321",
+                "summary_polyline": null,
+                "resource_state": 2
+            }]
+        },
+        "trainer": {
+            "type": "boolean",
+            "default": false,
+            "title": "The trainer Schema",
+            "examples": [
+                true
+            ]
+        },
+        "commute": {
+            "type": "boolean",
+            "default": false,
+            "title": "The commute Schema",
+            "examples": [
+                false
+            ]
+        },
+        "manual": {
+            "type": "boolean",
+            "default": false,
+            "title": "The manual Schema",
+            "examples": [
+                false
+            ]
+        },
+        "private": {
+            "type": "boolean",
+            "default": false,
+            "title": "The private Schema",
+            "examples": [
+                false
+            ]
+        },
+        "flagged": {
+            "type": "boolean",
+            "default": false,
+            "title": "The flagged Schema",
+            "examples": [
+                false
+            ]
+        },
+        "gear_id": {
+            "type": "string",
+            "default": "",
+            "title": "The gear_id Schema",
+            "examples": [
+                "b12345678987654321"
+            ]
+        },
+        "from_accepted_tag": {
+            "type": "boolean",
+            "default": false,
+            "title": "The from_accepted_tag Schema",
+            "examples": [
+                false
+            ]
+        },
+        "average_speed": {
+            "type": "number",
+            "default": 0.0,
+            "title": "The average_speed Schema",
+            "examples": [
+                5.54
+            ]
+        },
+        "max_speed": {
+            "type": "integer",
+            "default": 0,
+            "title": "The max_speed Schema",
+            "examples": [
+                11
+            ]
+        },
+        "average_cadence": {
+            "type": "number",
+            "default": 0.0,
+            "title": "The average_cadence Schema",
+            "examples": [
+                67.1
+            ]
+        },
+        "average_watts": {
+            "type": "number",
+            "default": 0.0,
+            "title": "The average_watts Schema",
+            "examples": [
+                175.3
+            ]
+        },
+        "weighted_average_watts": {
+            "type": "integer",
+            "default": 0,
+            "title": "The weighted_average_watts Schema",
+            "examples": [
+                210
+            ]
+        },
+        "kilojoules": {
+            "type": "number",
+            "default": 0.0,
+            "title": "The kilojoules Schema",
+            "examples": [
+                788.7
+            ]
+        },
+        "device_watts": {
+            "type": "boolean",
+            "default": false,
+            "title": "The device_watts Schema",
+            "examples": [
+                true
+            ]
+        },
+        "has_heartrate": {
+            "type": "boolean",
+            "default": false,
+            "title": "The has_heartrate Schema",
+            "examples": [
+                true
+            ]
+        },
+        "average_heartrate": {
+            "type": "number",
+            "default": 0.0,
+            "title": "The average_heartrate Schema",
+            "examples": [
+                140.3
+            ]
+        },
+        "max_heartrate": {
+            "type": "integer",
+            "default": 0,
+            "title": "The max_heartrate Schema",
+            "examples": [
+                178
+            ]
+        },
+        "max_watts": {
+            "type": "integer",
+            "default": 0,
+            "title": "The max_watts Schema",
+            "examples": [
+                406
+            ]
+        },
+        "pr_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The pr_count Schema",
+            "examples": [
+                0
+            ]
+        },
+        "total_photo_count": {
+            "type": "integer",
+            "default": 0,
+            "title": "The total_photo_count Schema",
+            "examples": [
+                1
+            ]
+        },
+        "has_kudoed": {
+            "type": "boolean",
+            "default": false,
+            "title": "The has_kudoed Schema",
+            "examples": [
+                false
+            ]
+        },
+        "suffer_score": {
+            "type": "integer",
+            "default": 0,
+            "title": "The suffer_score Schema",
+            "examples": [
+                82
+            ]
+        }
+    },
+    "examples": [{
+        "resource_state": 2,
+        "athlete": {
+            "id": 134815,
+            "resource_state": 1
+        },
+        "name": "Happy Friday",
+        "distance": 24931.4,
+        "moving_time": 4500,
+        "elapsed_time": 4500,
+        "total_elevation_gain": 0,
+        "type": "Ride",
+        "sport_type": "MountainBikeRide",
+        "workout_type": null,
+        "id": 154504250376823,
+        "external_id": "garmin_push_12345678987654321",
+        "upload_id": 987654321234567891234,
+        "start_date": "2018-05-02T12:15:09Z",
+        "start_date_local": "2018-05-02T05:15:09Z",
+        "timezone": "(GMT-08:00) America/Los_Angeles",
+        "utc_offset":
+            -
+            25200,
+        "start_latlng": null,
+        "end_latlng": null,
+        "location_city": null,
+        "location_state": null,
+        "location_country": "United States",
+        "achievement_count": 0,
+        "kudos_count": 3,
+        "comment_count": 1,
+        "athlete_count": 1,
+        "photo_count": 0,
+        "map": {
+            "id": "a12345678987654321",
+            "summary_polyline": null,
+            "resource_state": 2
+        },
+        "trainer": true,
+        "commute": false,
+        "manual": false,
+        "private": false,
+        "flagged": false,
+        "gear_id": "b12345678987654321",
+        "from_accepted_tag": false,
+        "average_speed": 5.54,
+        "max_speed": 11,
+        "average_cadence": 67.1,
+        "average_watts": 175.3,
+        "weighted_average_watts": 210,
+        "kilojoules": 788.7,
+        "device_watts": true,
+        "has_heartrate": true,
+        "average_heartrate": 140.3,
+        "max_heartrate": 178,
+        "max_watts": 406,
+        "pr_count": 0,
+        "total_photo_count": 1,
+        "has_kudoed": false,
+        "suffer_score": 82
+    }]
+}

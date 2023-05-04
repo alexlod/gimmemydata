@@ -1,0 +1,173 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "contributors",
+        "day",
+        "score",
+        "temperature_deviation",
+        "temperature_trend_deviation",
+        "timestamp"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "default": "",
+            "title": "The id Schema",
+            "examples": [
+                "string"
+            ]
+        },
+        "contributors": {
+            "type": "object",
+            "default": {},
+            "title": "The contributors Schema",
+            "required": [
+                "activity_balance",
+                "body_temperature",
+                "hrv_balance",
+                "previous_day_activity",
+                "previous_night",
+                "recovery_index",
+                "resting_heart_rate",
+                "sleep_balance"
+            ],
+            "properties": {
+                "activity_balance": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The activity_balance Schema",
+                    "examples": [
+                        "Contribution of cumulative activity balance in range [1, 100]."
+                    ]
+                },
+                "body_temperature": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The body_temperature Schema",
+                    "examples": [
+                        "Contribution of body temperature in range [1, 100]."
+                    ]
+                },
+                "hrv_balance": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The hrv_balance Schema",
+                    "examples": [
+                        "Contribution of heart rate variability balance in range [1, 100]."
+                    ]
+                },
+                "previous_day_activity": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The previous_day_activity Schema",
+                    "examples": [
+                        "Contribution of previous day's activity in range [1, 100]."
+                    ]
+                },
+                "previous_night": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The previous_night Schema",
+                    "examples": [
+                        "Contribution of previous night's sleep in range [1, 100]."
+                    ]
+                },
+                "recovery_index": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The recovery_index Schema",
+                    "examples": [
+                        "Contribution of recovery index in range [1, 100]."
+                    ]
+                },
+                "resting_heart_rate": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The resting_heart_rate Schema",
+                    "examples": [
+                        "Contribution of resting heart rate in range [1, 100]."
+                    ]
+                },
+                "sleep_balance": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The sleep_balance Schema",
+                    "examples": [
+                        "Contribution of sleep balance in range [1, 100]."
+                    ]
+                }
+            },
+            "examples": [{
+                "activity_balance": "Contribution of cumulative activity balance in range [1, 100].",
+                "body_temperature": "Contribution of body temperature in range [1, 100].",
+                "hrv_balance": "Contribution of heart rate variability balance in range [1, 100].",
+                "previous_day_activity": "Contribution of previous day's activity in range [1, 100].",
+                "previous_night": "Contribution of previous night's sleep in range [1, 100].",
+                "recovery_index": "Contribution of recovery index in range [1, 100].",
+                "resting_heart_rate": "Contribution of resting heart rate in range [1, 100].",
+                "sleep_balance": "Contribution of sleep balance in range [1, 100]."
+            }]
+        },
+        "day": {
+            "type": "string",
+            "default": "",
+            "title": "The day Schema",
+            "examples": [
+                "2019-08-24"
+            ]
+        },
+        "score": {
+            "type": "integer",
+            "default": 0,
+            "title": "The score Schema",
+            "examples": [
+                0
+            ]
+        },
+        "temperature_deviation": {
+            "type": "integer",
+            "default": 0,
+            "title": "The temperature_deviation Schema",
+            "examples": [
+                0
+            ]
+        },
+        "temperature_trend_deviation": {
+            "type": "integer",
+            "default": 0,
+            "title": "The temperature_trend_deviation Schema",
+            "examples": [
+                0
+            ]
+        },
+        "timestamp": {
+            "type": "string",
+            "default": "",
+            "title": "The timestamp Schema",
+            "examples": [
+                "2019-08-24T14:15:22Z"
+            ]
+        }
+    },
+    "examples": [{
+        "id": "string",
+        "contributors": {
+            "activity_balance": "Contribution of cumulative activity balance in range [1, 100].",
+            "body_temperature": "Contribution of body temperature in range [1, 100].",
+            "hrv_balance": "Contribution of heart rate variability balance in range [1, 100].",
+            "previous_day_activity": "Contribution of previous day's activity in range [1, 100].",
+            "previous_night": "Contribution of previous night's sleep in range [1, 100].",
+            "recovery_index": "Contribution of recovery index in range [1, 100].",
+            "resting_heart_rate": "Contribution of resting heart rate in range [1, 100].",
+            "sleep_balance": "Contribution of sleep balance in range [1, 100]."
+        },
+        "day": "2019-08-24",
+        "score": 0,
+        "temperature_deviation": 0,
+        "temperature_trend_deviation": 0,
+        "timestamp": "2019-08-24T14:15:22Z"
+    }]
+}

@@ -1,0 +1,391 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "class_5_min",
+        "score",
+        "active_calories",
+        "average_met_minutes",
+        "contributors",
+        "equivalent_walking_distance",
+        "high_activity_met_minutes",
+        "high_activity_time",
+        "inactivity_alerts",
+        "low_activity_met_minutes",
+        "low_activity_time",
+        "medium_activity_met_minutes",
+        "medium_activity_time",
+        "met",
+        "meters_to_target",
+        "non_wear_time",
+        "resting_time",
+        "sedentary_met_minutes",
+        "sedentary_time",
+        "steps",
+        "target_calories",
+        "target_meters",
+        "total_calories",
+        "day",
+        "timestamp"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "default": "",
+            "title": "The id Schema",
+            "examples": [
+                "string"
+            ]
+        },
+        "class_5_min": {
+            "type": "string",
+            "default": "",
+            "title": "The class_5_min Schema",
+            "examples": [
+                "string"
+            ]
+        },
+        "score": {
+            "type": "integer",
+            "default": 0,
+            "title": "The score Schema",
+            "examples": [
+                0
+            ]
+        },
+        "active_calories": {
+            "type": "integer",
+            "default": 0,
+            "title": "The active_calories Schema",
+            "examples": [
+                0
+            ]
+        },
+        "average_met_minutes": {
+            "type": "integer",
+            "default": 0,
+            "title": "The average_met_minutes Schema",
+            "examples": [
+                0
+            ]
+        },
+        "contributors": {
+            "type": "object",
+            "default": {},
+            "title": "The contributors Schema",
+            "required": [
+                "meet_daily_targets",
+                "move_every_hour",
+                "recovery_time",
+                "stay_active",
+                "training_frequency",
+                "training_volume"
+            ],
+            "properties": {
+                "meet_daily_targets": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The meet_daily_targets Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "move_every_hour": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The move_every_hour Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "recovery_time": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The recovery_time Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "stay_active": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The stay_active Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "training_frequency": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The training_frequency Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "training_volume": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The training_volume Schema",
+                    "examples": [
+                        0
+                    ]
+                }
+            },
+            "examples": [{
+                "meet_daily_targets": 0,
+                "move_every_hour": 0,
+                "recovery_time": 0,
+                "stay_active": 0,
+                "training_frequency": 0,
+                "training_volume": 0
+            }]
+        },
+        "equivalent_walking_distance": {
+            "type": "integer",
+            "default": 0,
+            "title": "The equivalent_walking_distance Schema",
+            "examples": [
+                0
+            ]
+        },
+        "high_activity_met_minutes": {
+            "type": "integer",
+            "default": 0,
+            "title": "The high_activity_met_minutes Schema",
+            "examples": [
+                0
+            ]
+        },
+        "high_activity_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The high_activity_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "inactivity_alerts": {
+            "type": "integer",
+            "default": 0,
+            "title": "The inactivity_alerts Schema",
+            "examples": [
+                0
+            ]
+        },
+        "low_activity_met_minutes": {
+            "type": "integer",
+            "default": 0,
+            "title": "The low_activity_met_minutes Schema",
+            "examples": [
+                0
+            ]
+        },
+        "low_activity_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The low_activity_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "medium_activity_met_minutes": {
+            "type": "integer",
+            "default": 0,
+            "title": "The medium_activity_met_minutes Schema",
+            "examples": [
+                0
+            ]
+        },
+        "medium_activity_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The medium_activity_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "met": {
+            "type": "object",
+            "default": {},
+            "title": "The met Schema",
+            "required": [
+                "interval",
+                "items",
+                "timestamp"
+            ],
+            "properties": {
+                "interval": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The interval Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "default": [],
+                    "title": "The items Schema",
+                    "items": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "A Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "examples": [
+                        [
+                            0]
+                    ]
+                },
+                "timestamp": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The timestamp Schema",
+                    "examples": [
+                        "2019-08-24T14:15:22Z"
+                    ]
+                }
+            },
+            "examples": [{
+                "interval": 0,
+                "items": [
+                    0
+                ],
+                "timestamp": "2019-08-24T14:15:22Z"
+            }]
+        },
+        "meters_to_target": {
+            "type": "integer",
+            "default": 0,
+            "title": "The meters_to_target Schema",
+            "examples": [
+                0
+            ]
+        },
+        "non_wear_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The non_wear_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "resting_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The resting_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "sedentary_met_minutes": {
+            "type": "integer",
+            "default": 0,
+            "title": "The sedentary_met_minutes Schema",
+            "examples": [
+                0
+            ]
+        },
+        "sedentary_time": {
+            "type": "integer",
+            "default": 0,
+            "title": "The sedentary_time Schema",
+            "examples": [
+                0
+            ]
+        },
+        "steps": {
+            "type": "integer",
+            "default": 0,
+            "title": "The steps Schema",
+            "examples": [
+                0
+            ]
+        },
+        "target_calories": {
+            "type": "integer",
+            "default": 0,
+            "title": "The target_calories Schema",
+            "examples": [
+                0
+            ]
+        },
+        "target_meters": {
+            "type": "integer",
+            "default": 0,
+            "title": "The target_meters Schema",
+            "examples": [
+                0
+            ]
+        },
+        "total_calories": {
+            "type": "integer",
+            "default": 0,
+            "title": "The total_calories Schema",
+            "examples": [
+                0
+            ]
+        },
+        "day": {
+            "type": "string",
+            "default": "",
+            "title": "The day Schema",
+            "examples": [
+                "2019-08-24"
+            ]
+        },
+        "timestamp": {
+            "type": "string",
+            "default": "",
+            "title": "The timestamp Schema",
+            "examples": [
+                "2019-08-24T14:15:22Z"
+            ]
+        }
+    },
+    "examples": [{
+        "id": "string",
+        "class_5_min": "string",
+        "score": 0,
+        "active_calories": 0,
+        "average_met_minutes": 0,
+        "contributors": {
+            "meet_daily_targets": 0,
+            "move_every_hour": 0,
+            "recovery_time": 0,
+            "stay_active": 0,
+            "training_frequency": 0,
+            "training_volume": 0
+        },
+        "equivalent_walking_distance": 0,
+        "high_activity_met_minutes": 0,
+        "high_activity_time": 0,
+        "inactivity_alerts": 0,
+        "low_activity_met_minutes": 0,
+        "low_activity_time": 0,
+        "medium_activity_met_minutes": 0,
+        "medium_activity_time": 0,
+        "met": {
+            "interval": 0,
+            "items": [
+                0
+            ],
+            "timestamp": "2019-08-24T14:15:22Z"
+        },
+        "meters_to_target": 0,
+        "non_wear_time": 0,
+        "resting_time": 0,
+        "sedentary_met_minutes": 0,
+        "sedentary_time": 0,
+        "steps": 0,
+        "target_calories": 0,
+        "target_meters": 0,
+        "total_calories": 0,
+        "day": "2019-08-24",
+        "timestamp": "2019-08-24T14:15:22Z"
+    }]
+}

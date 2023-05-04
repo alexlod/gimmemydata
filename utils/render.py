@@ -40,3 +40,6 @@ class DBClient():
             print("Task log inserted successfully.")
         except Exception as e:
             print(f"Error while inserting task log: {e}")
+
+    def close(self):
+        self.connection.close()

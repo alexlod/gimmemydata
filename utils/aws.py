@@ -1,7 +1,6 @@
 
 import boto3
 from manage.config import Config
-import datetime
 
 class S3Client():
 

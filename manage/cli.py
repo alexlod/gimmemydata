@@ -5,12 +5,15 @@ import sys
 import argparse
 import os
 from crontab import CronTab
-from datasources.spotify import spotify as spotify_main
-from datasources.strava import strava as strava_main
-from datasources.oura import oura as oura_main
-from datasources.github import github as github_main
+from datasources.spotify import main as spotify_main
+from datasources.strava import main as strava_main
+from datasources.oura import main as oura_main
+from datasources.github import main as github_main
 
 SUPPORTED_DATASOURCES = ['spotify', 'strava', 'oura', 'github']
+
+# Import your deploy script
+from manage.deploy import main as deploy_main
 
 def enableDebugMode():
     logger = logging.getLogger()
@@ -20,13 +23,23 @@ def enableDebugMode():
 def list_scheduled_jobs():
     cron = CronTab(user=os.getlogin())
     print("Current scheduled jobs:")
-    for job in cron:
+    gimmemydata_jobs = [job for job in cron if job.comment == "Created by GimmeMyData"] 
+    for job in gimmemydata_jobs:
         print(job)
+
+def clear_scheduled_jobs():
+    cron = CronTab(user=os.getlogin())
+    jobs_to_remove = [job for job in cron if job.comment == "Created by GimmeMyData"] 
+    for job in jobs_to_remove:
+        cron.remove(job)
+    cron.write()
+    print("Cleared all GimmeMyData cron jobs for current user.")
 
 def schedule_job(service, interval):
     cron = CronTab(user=os.getlogin())
     job_command = f"python3 {os.path.abspath(sys.modules[service + '_main'].__file__)}"
     job = cron.new(command=job_command)
+    job.set_comment("Created by GimmeMyData")  # Add this line so we can identify jobs created by this app
     job.setall(f"*/{interval} * * * *")  # Run every 'interval' minutes
     cron.write()
 
@@ -59,11 +72,17 @@ def cli():
     subparsers = parser.add_subparsers(dest='command')
 
     # list command
-    list_parser = subparsers.add_parser('list', help='List current crontab jobs.')
+    list_parser = subparsers.add_parser('list', help='List currently deployed GimmeMyData cron jobs for current user.')
+
+    # clear command
+    clear_parser = subparsers.add_parser('clear', help='Clear all scheduled GimmeMyData cron jobs.')
+    
+    # deploy command
+    deploy_parser = subparsers.add_parser('deploy', help='Deploy all jobs defined in manage.deploy.')
 
     # run command
     run_parser = subparsers.add_parser('run', help='Manually run a data source script.')
-    run_parser.add_argument('service', choices=SUPPORTED_DATASOURCES, help='Service to run (spotify or strava).')
+    run_parser.add_argument('service', choices=SUPPORTED_DATASOURCES, help='Service to run.')
 
     # schedule command
     schedule_parser = subparsers.add_parser('schedule', help='Schedule a data source script to run at a given interval (in minutes).')
@@ -81,6 +100,10 @@ def cli():
 
     if args.command == 'list':
         list_scheduled_jobs()
+    elif args.command == 'clear':
+        clear_scheduled_jobs()
+    elif args.command == 'deploy':
+        deploy_main()
     elif args.command == 'run':
         run_script(args.service)
     elif args.command == 'schedule':

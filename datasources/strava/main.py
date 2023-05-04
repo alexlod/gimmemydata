@@ -6,7 +6,6 @@ from utils.render import DBClient
 from utils.aws import S3Client
 from datasources.strava.auth import StravaAuth
 from botocore.exceptions import ClientError
-import io
 
 POLL_INTERVAL = 3600
 S3_BUCKET_NAME = Config().get_param('S3_BUCKET_NAME')

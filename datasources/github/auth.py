@@ -1,7 +1,6 @@
 from manage.config import Config
 from utils.render import DBClient
 from requests_oauthlib import OAuth2Session
-from github import Github
 import re
 
 class GithubAuth:
@@ -11,7 +10,7 @@ class GithubAuth:
         self.AUTH_REDIRECT_URI = 'https://localhost:3000/api/auth/callback/github'
         self.GITHUB_AUTHORIZATION_BASE_URL = "https://github.com/login/oauth/authorize"
         self.GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token"
-        self.SCOPES = "user repo"
+        self.SCOPES = ["repo,user"]
         
         # Set up DB Connection for Saving Auth Credentials
         self.conn = DBClient().connection
@@ -19,11 +18,12 @@ class GithubAuth:
 
         self.gh_oauth = OAuth2Session(self.GITHUB_CLIENT_ID, scope=self.SCOPES, redirect_uri=self.AUTH_REDIRECT_URI)
         self.access_token = self.get_valid_access_token()
-        self.client = Github(self.access_token)
 
     def get_tokens_from_db(self):
         self.cur.execute("SELECT access_token, refresh_token, expiration_timestamp FROM gimmemydata_auth WHERE datasource = %s", ('github',))
         row = self.cur.fetchone()
+        if row:
+            return {"access_token": row[0], "refresh_token": row[1], "expiration_timestamp": row[2]}
         return row
 
     def get_github_authorize_url(self):
@@ -43,8 +43,7 @@ class GithubAuth:
             ('github', access_token, refresh_token, expiration_timestamp)
         )
         self.conn.commit()
-        print("Token updated in DB:", access_token)  # Add this line
-
+        print("Token updated in DB:", access_token)
 
     def get_valid_access_token(self):
         token_info = self.get_tokens_from_db()
@@ -60,11 +59,22 @@ class GithubAuth:
         
         # Extract the code from the response URL
         code = re.search('code=([^&]+)', response).group(1)
-        token = self.gh_oauth.fetch_token(self.GITHUB_TOKEN_URL, scope=self.SCOPES, client_secret=self.GITHUB_CLIENT_SECRET, authorization_response=response)
-        print("Token fetched from Github:", token['access_token'])
+        print(f'code: {code}')
+
+        token = None 
+        try:
+            token = self.gh_oauth.fetch_token(self.GITHUB_TOKEN_URL, client_secret=self.GITHUB_CLIENT_SECRET, code=code)
+            print("Token fetched from Github: ", token['access_token'])
+        
+        except Exception as e:
+            print(f"Error fetching token from Github: {e}")
+            return None
+        
         self._update_token_in_db(token["access_token"], None, None)
         self.access_token = token["access_token"]  # Update the access_token attribute
         self.conn.close()  # Close the database connection
 
         return token["access_token"]
 
+    def close(self):
+        self.gh_oauth.close()

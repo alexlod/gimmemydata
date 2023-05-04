@@ -12,7 +12,7 @@ A utility app for gathering my personal data from all the various services I use
     - google
     - apple
     - slack
-- obsidian - implement local?  Or require making the vault a private repo on github?  TBD...   Maybe it could even be an obsidian plugin that can be installed to upload stats to github, a DB, or 
+- obsidian - implement local?  Or require making the vault a private repo on github?  TBD...   Maybe it could even be an obsidian plugin that can be installed to upload stats to github, a DB, or to s3?
 - add batch interface for datasources without api's (e.g. Audible, Goodreads)
 - Simple UI for managing integrations and auth flows
 - potentially overhaul the data model and see if we can standardize it more.  

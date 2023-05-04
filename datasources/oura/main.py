@@ -10,14 +10,6 @@ from utils.aws import S3Client
 OURA_PERSONAL_ACCESS_TOKEN = Config().get_param('OURA_PERSONAL_ACCESS_TOKEN')
 S3_BUCKET_NAME = Config().get_param('S3_BUCKET_NAME')
 
-endpoints = ['daily_activity','daily_sleep','sleep','workout','daily_readiness']
-
-daily_activity_url = 'https://api.ouraring.com/v2/usercollection/daily_activity' 
-daily_sleep_url = 'https://api.ouraring.com/v2/usercollection/daily_sleep' 
-sleep_url = 'https://api.ouraring.com/v2/usercollection/sleep' 
-workout_url = 'https://api.ouraring.com/v2/usercollection/workout' 
-daily_readiness_url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
-
 # Set up S3 client and bucket
 s3 = S3Client()
 

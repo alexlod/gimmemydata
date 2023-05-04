@@ -211,8 +211,7 @@
             "default": 0,
             "title": "The utc_offset Schema",
             "examples": [
-                -
-                25200
+                -25200
             ]
         },
         "start_latlng": {
@@ -534,8 +533,7 @@
         "start_date_local": "2018-05-02T05:15:09Z",
         "timezone": "(GMT-08:00) America/Los_Angeles",
         "utc_offset":
-            -
-            25200,
+            -25200,
         "start_latlng": null,
         "end_latlng": null,
         "location_city": null,
